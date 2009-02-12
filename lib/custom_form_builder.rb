@@ -16,6 +16,9 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def build_shell(field, name, options)
+
+    template_path = "forms/#{self.name.underscore}"
+
     @template.capture do
       locals = {
         :element => yield,
@@ -23,10 +26,10 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
       }
       if has_errors_on?(field)
         locals.merge!(:error => error_message(field, options))
-        @template.render :partial => "forms/#{name}_with_errors",
+        @template.render :partial => "#{template_path}/#{name}_with_errors",
                          :locals => locals
       else
-        @template.render :partial => "forms/#{name}",
+        @template.render :partial => "#{template_path}/#{name}",
                          :locals => locals
       end
     end
