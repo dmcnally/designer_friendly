@@ -1,6 +1,3 @@
-class <%= @class_name %> < CustomFormBuilder
-
-
-
+class <%= class_name %>FormBuilder < CustomFormBuilder
 
 end
