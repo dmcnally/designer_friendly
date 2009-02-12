@@ -1,13 +1,12 @@
 DesignerFriendly
 ================
 
-Introduction goes here.
+Designer friendly is aimed at making it easier for designers to style the
+various inputs types used within rails forms.  By providing different
+custom form builders which render out partials it is easier for a designer
+to provide a number of form styles that may be used within an application.
 
+As the plugin evolves over the coming days I'll get around to posting some
+instructions on its usage here.
 
-Example
-=======
-
-Example goes here.
-
-
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+Copyright (c) 2009 David McNally, released under the MIT license
