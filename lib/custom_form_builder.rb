@@ -6,6 +6,8 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   class_inheritable_accessor :templates
 
+  
+
   helpers = field_helpers - %w(label fields_for)
 
   helpers.each do |name|
@@ -18,6 +20,8 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def build_shell(field, name, options)
+
+    self.class.templates ||= {}
 
     template_path = "forms/#{self.class.name.underscore}"
 
@@ -33,7 +37,26 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
         locals.merge!(:error => error_message(field, options))
         partial = "#{partial}_with_errors"
       end
-      @template.render :partial => partial,
+
+      location = self.class.templates[partial]
+      unless location
+        if File.exist?("#{partial}.html.erb")
+          location = partial
+        else
+          if has_errors_on?(field)
+            location = "#{template_path}/general_with_errors"
+          else
+            location = "#{template_path}/general"
+          end
+        end
+
+        self.class.templates[partial] = location
+
+      end
+
+      location = "/forms/testing_form_builder/general"
+
+      @template.render :partial => location,
                        :locals => locals
     end
   end
