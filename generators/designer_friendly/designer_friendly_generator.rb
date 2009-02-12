@@ -1,11 +1,10 @@
 class DesignerFriendlyGenerator < Rails::Generator::NamedBase
   def manifest
 
-    destination_path = "/app/views/forms/#{file_path}"
+    destination_path = "/app/views/forms/#{file_path}_form_builder"
 
     class_name = file_path.classify
-    
-    debugger
+
     record do |m|
       m.directory destination_path
       m.template 'views/forms/general.html.erb', "#{destination_path}/general.html.erb"
