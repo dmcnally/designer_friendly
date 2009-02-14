@@ -30,7 +30,7 @@ a "general" and "general_with_errors" partial will be created.
 
 To use the builder specify the builder when using form_for :-
 
-form_for @object, :builder => PrettyFormBuilder do
+form_for @object, :builder => PrettyFormBuilder do |f|
 
 end
 
@@ -41,3 +41,4 @@ properly with various different input types.  Use, experiment, modify at your
 own risk.
 
 Copyright (c) 2009 David McNally, released under the MIT license
+
