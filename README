@@ -30,8 +30,9 @@ Example
 Will generate the custom form builder PrettyFormBuilder.  The PrettyFormBuilder
 class will be created in the models folder.  The partials for the form builder
 will be created in the "forms/pretty_form_builder".  In the first instance only
-a "general" and "general_with_errors" partial will be created.
-
+a general, text_field and text_area partials will be created.  You can create
+others and try them out by creating a partial that follows the same naming
+convention as the input type.
 
 To use the builder specify the builder when using form_for :-
 
