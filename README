@@ -9,6 +9,10 @@ to provide a number of form styles that may be used within an application.
 This plugin does not have any unit tests at this point and has only been
 developed against edge rails.
 
+Just as an ass covering excerise I have yet to test this properly with various
+different input types, especially checkboxes, dropdowns and radio buttons.
+Use, experiment, modify at your own risk.
+
 Usage
 =====
 
@@ -34,11 +38,17 @@ form_for @object, :builder => PrettyFormBuilder do |f|
 
 end
 
+the generate will create a forms/pretty folder in your views folder and copy
+four example partials.
+
 More instructions will appear here when I haven't had a drink!
 
-Just as an ass covering excerise I have yet to expand on this and test it
-properly with various different input types.  Use, experiment, modify at your 
-own risk.
+I'd like to thank Mike Mangino (http://www.elevatedrails.com) for the most
+excellent recipe published in "Advanced Rails Recipes" which gave me some
+direction in writing this plugin.  I'd also like to extend my gratitude to
+certain designers for their constant bitching about Rails spitting out ugly HTML
+(In fairness they said the same about other frameworks too) who gave me the
+inspiration to write this if only to shut them up.
 
 Copyright (c) 2009 David McNally, released under the MIT license
 
