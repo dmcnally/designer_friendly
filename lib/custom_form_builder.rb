@@ -6,47 +6,63 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   class_inheritable_accessor :templates
 
-  
-
   helpers = field_helpers - %w(label fields_for)
 
   helpers.each do |name|
     define_method name do |field, *args|
       options = args.detect{|argument| argument.is_a?(Hash)} || {}
-      build_shell(field, name, options) do
+      render_custom_input(field, name, options) do
         super
       end
     end
   end
 
-  def build_shell(field, name, options)
+  def render_custom_input(field, name, options)
 
     self.class.templates ||= {}
 
     template_path = "forms/#{self.class.name.underscore}"
 
     @template.capture do
+
+      # Get the options from an instance tag
+      instance_tag = ActionView::Helpers::InstanceTag.new(object_name, field, self, options.delete(:object))
+
+      # Sure this bit can be improved.  This is just to get the name of the
+      # inputs.
+      name_and_id_hash = {}
+      instance_tag.send(:add_default_name_and_id, name_and_id_hash)
+      name_and_id_hash.symbolize_keys!
+
+
       locals = {
         :element => yield,
-        :label => label(field, options[:label])
+        :label => label(field, options[:label]),
+        :object => instance_tag.object
       }
 
-      partial = "#{template_path}/#{name}"
+      # Merge in the returned id and name
+      locals.merge!(name_and_id_hash)
+
+
+      partial = "#{name}"
 
       if has_errors_on?(field)
         locals.merge!(:error => error_message(field, options))
         partial = "#{partial}_with_errors"
       end
 
+      puts "=========== Looking for #{partial}"
+
       location = self.class.templates[partial]
       unless location
-        if File.exist?("#{partial}.html.erb")
+        if File.exist?("#{RAILS_ROOT}/app/views/#{template_path}/_#{partial}.html.erb")
           location = partial
         else
           if has_errors_on?(field)
-            location = "#{template_path}/general_with_errors"
+            location = "general_with_errors"
           else
-            location = "#{template_path}/general"
+            location = "general"
           end
         end
 
@@ -54,9 +70,9 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
       end
 
-      location = "/forms/testing_form_builder/general"
 
-      @template.render :partial => location,
+
+      @template.render :partial => "#{template_path}/#{location}",
                        :locals => locals
     end
   end
