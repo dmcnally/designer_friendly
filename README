@@ -11,7 +11,8 @@ developed against edge rails.
 
 Just as an ass covering excerise I have yet to test this properly with various
 different input types, especially checkboxes, dropdowns and radio buttons.
-Use, experiment, modify at your own risk.
+Use, experiment, modify at your own risk.  It is more a proof of concept that
+needs taking further
 
 Usage
 =====
