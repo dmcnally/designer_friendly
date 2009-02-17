@@ -14,6 +14,9 @@ different input types, especially checkboxes, dropdowns and radio buttons.
 Use, experiment, modify at your own risk.  It is more a proof of concept that
 needs taking further
 
+UPDATE 2009-02-17: check box inputs work fine.  Have added in an example
+checkbox template - rerun generator to include in application.
+
 Usage
 =====
 
@@ -43,7 +46,19 @@ end
 the generate will create a forms/pretty folder in your views folder and copy
 four example partials.
 
-More instructions will appear here when I haven't had a drink!
+When using the form helper commands there is no need to render the label and
+the input separately.  The following will render the input and a label for the
+title field:
+
+f.text_field :title
+
+There is also an option to override the label with custom text as follows:
+
+f.text_field :title, :label => "Enter the title"
+
+
+Thanks
+======
 
 I'd like to thank Mike Mangino (http://www.elevatedrails.com) for the most
 excellent recipe published in "Advanced Rails Recipes" which gave me some

@@ -38,6 +38,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
       locals = {
         :element => yield,
         :label => label(field, options[:label]),
+        :label_text => (options[:label] || field.to_s.humanize),
         :object => instance_tag.object
       }
 

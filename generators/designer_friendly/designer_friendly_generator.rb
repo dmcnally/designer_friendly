@@ -13,6 +13,8 @@ class DesignerFriendlyGenerator < Rails::Generator::NamedBase
       m.template 'views/forms/_general_with_errors.html.erb', "#{destination_path}/_text_field_with_errors.html.erb"
       m.template 'views/forms/_general.html.erb', "#{destination_path}/_text_area.html.erb"
       m.template 'views/forms/_general_with_errors.html.erb', "#{destination_path}/_test_area_with_errors.html.erb"
+      m.template 'views/forms/_check_box.html.erb', "#{destination_path}/_check_box.html.erb"
+      m.template 'views/forms/_check_box_with_errors.html.erb', "#{destination_path}/_check_box_with_errors.html.erb"
 
       m.template 'models/form_builder.rb', "/app/models/#{file_path}_form_builder.rb", :assigns => {:class_name => class_name}
     end
