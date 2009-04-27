@@ -6,7 +6,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   class_inheritable_accessor :templates
 
-  helpers = field_helpers - %w(label fields_for)
+  helpers = field_helpers - %w(label fields_for hidden_field)
 
   helpers.each do |name|
     define_method name do |field, *args|
